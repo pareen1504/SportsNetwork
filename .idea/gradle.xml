@@ -30,7 +30,6 @@
             <option value="$PROJECT_DIR$/common/palette" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/network" />
-            <option value="$PROJECT_DIR$/datadependency" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/feed" />
             <option value="$PROJECT_DIR$/features/feed/data" />

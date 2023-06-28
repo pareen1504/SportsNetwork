@@ -1,14 +1,16 @@
 # Sports Network App
 
-The `Sports Network` App provided all the sports feed with most recent on the top.
+The `Sports Network` App provides all the sports feed with most recent on the top.
 <br>
 <br>
 *What the sample looks like:*<br>
 
 <img src="https://github.com/pareen1504/SportsNetwork/assets/13451186/16638005-fe9c-4b00-bd22-cc9dda8ea0b3" alt="home_screen" width="30%">
 <img src="https://github.com/pareen1504/SportsNetwork/assets/13451186/705409ac-cfd0-43d5-910c-e60aee58a149" alt="feed_screen" width="30%">
+
 <br>
 <br>
+
 For convenience, the `:common` module has been added, which contains utilities, extension functions and compose elements used in
 most projects and the `:common:palette` module which contains themes, styles, colors for the project.
 
@@ -22,14 +24,13 @@ The `:core` module has been added, for network service and can also be used for 
 - Retrofit, Coroutines, Moshi, OkHttp
 - Android ViewModel
 - Hilt
-- Gradle DSL
+- Kotlin dsl
 
 
 # Dependencies used
 - accompanist
 - kotlin
 - kotlinxCoroutines
-- junit
 - appcompat
 - material
 - hilt
@@ -43,6 +44,10 @@ The `:core` module has been added, for network service and can also be used for 
 - okhttp
 - moshi
 - json
+- jUnit4
+- mockWebserver
+- koTestProperty
+- mockk
 
 # Written previously on a personal project
 - Compose theme used in `common:palette` is from my previous project.
@@ -61,17 +66,25 @@ The `:core` module has been added, for network service and can also be used for 
 
 # Things to be added for production ready.
 - Compliance with code-style
-    -- `Detekt`, `Ktlint` libraries to maintain a uniform code style. So Before pushing, we can check the new code for compliance with the rules using the `./gradlew ktFormat && ./gradlew detekt` command, or configure
-        task in Android Studio. 
-    -- CI/CD to be configured with Detekt, Ktlint to check the project with Push, Pull Request and Git workflows.
+  -- `Detekt`, `Ktlint` libraries to maintain a uniform code style. So Before pushing, we can check
+  the new code for compliance with the rules using the `./gradlew ktFormat && ./gradlew detekt`
+  command, or configure
+  task in Android Studio.
+  -- `CI/CD` to be configured with Detekt, Ktlint to check the project with Push, Pull Request and
+  Git workflows.
 
 - Git hooks
-    -- `pre-code-commit` guidelines, to makes sure PR structure required for the workflow.
+  -- `pre-code-commit` guidelines, to makes sure PR structure required for the workflow.
 
 - implement Crashlytics and Analytics
 - Multi-language support.
-
+- Compose Navigation.
 
 ## Tests
+
+Added 7 test cases with JUnit and Mockito
+
+- 1 response Mapper
+- 6 for repository parsing.
 
 

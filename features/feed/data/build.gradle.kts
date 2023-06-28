@@ -15,5 +15,10 @@ dependencies {
     kapt(libs.hilt.core.compiler)
     ksp(libs.moshi.codegen)
     implementation(libs.retrofit.core)
+
+    testImplementation(libs.junit4)
+    testImplementation(libs.kotestProperty)
+    testImplementation(libs.mock.webserver)
     testImplementation(libs.retrofit.moshi.convertor)
+    testImplementation(libs.mockK)
 }
