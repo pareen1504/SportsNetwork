@@ -11,7 +11,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.pd.sportsnetwork.feed.FeedActivity
+import com.pd.feed.feed.FeedActivity
 import com.pd.sportsnetwork.ui.state.MainActivityUiState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect

@@ -59,7 +59,7 @@ fun SportsNetworkTheme(darkTheme: Boolean = isNightMode(), content: @Composable 
     val useDarkIcons = darkTheme.not()
     DisposableEffect(systemUiController, useDarkIcons) {
         systemUiController.setSystemBarsColor(
-            color = colors.backgroundSecondary,
+            color = colors.backgroundTertiary,
             darkIcons = useDarkIcons
         )
         onDispose { /*No-Op*/ }

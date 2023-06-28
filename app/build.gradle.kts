@@ -39,11 +39,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":datadependency"))
     implementation(project(":common:android"))
     implementation(project(":common:palette"))
     implementation(project(":core:network"))
     implementation(project(":features:feed"))
+    implementation(project(":features:feed:data"))
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)

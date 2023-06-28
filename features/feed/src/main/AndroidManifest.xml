@@ -2,7 +2,7 @@
 
     <application>
         <activity
-            android:name="com.pd.sportsnetwork.feed.FeedActivity"
+            android:name="com.pd.feed.feed.FeedActivity"
             android:exported="false"
             />
     </application>

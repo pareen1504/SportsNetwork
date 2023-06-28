@@ -17,7 +17,6 @@ dependencyResolutionManagement {
 rootProject.name = "SportsNetwork"
 include(":app")
 include(":common:android")
-include(":datadependency")
 include(":core:network")
 include(":common:jvm")
 include(":common:palette")
