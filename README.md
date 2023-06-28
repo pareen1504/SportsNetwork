@@ -1,9 +1,12 @@
 # Sports Network App
 
 The `Sports Network` App provided all the sports feed with most recent on the top.
+<br>
+<br>
+*What the sample looks like:*<br>
 
-*What the sample looks like:*
-
+<img src="https://github.com/pareen1504/SportsNetwork/assets/13451186/16638005-fe9c-4b00-bd22-cc9dda8ea0b3" alt="home_screen" width="30%">
+<img src="https://github.com/pareen1504/SportsNetwork/assets/13451186/705409ac-cfd0-43d5-910c-e60aee58a149" alt="feed_screen" width="30%">
 
 
 For convenience, the `:common` module has been added, which contains utilities, extension functions and compose elements used in
@@ -12,14 +15,14 @@ most projects and the `:common:palette` module which contains themes, styles, co
 The `:core` module has been added, for network service and can also be used for analytics and cache using datastore. 
 
 ## Stack
-• Android Jetpack + Compose
-• Android App modularization
-• Kotlin
-• MV/I/VM
-• Retrofit, Coroutines, Moshi, OkHttp
-• Android ViewModel
-• Hilt
-• Gradle DSL
+- Android Jetpack + Compose
+- Android App modularization
+- Kotlin
+- MV/I/VM
+- Retrofit, Coroutines, Moshi, OkHttp
+- Android ViewModel
+- Hilt
+- Gradle DSL
 
 
 # Dependencies used
