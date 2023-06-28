@@ -67,6 +67,7 @@ class FeedViewModel @Inject constructor(
                 }
             )
         }.onFailure {
+            updateIsRefreshing(false)
             _feedFlowUiState.value = FeedFlowUiState.Error
             Log.e("FeedViewModel", "feedUseCase api failure")
         }
