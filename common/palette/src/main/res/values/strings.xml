@@ -1,0 +1,5 @@
+<resources>
+    <string name="get_results">Get Results</string>
+    <string name="feed_error">"Oops!\nUnable to fetch data, Please try again after some time"</string>
+    <string name="not_connected">⚠️ You aren’t connected to the internet</string>
+</resources>
