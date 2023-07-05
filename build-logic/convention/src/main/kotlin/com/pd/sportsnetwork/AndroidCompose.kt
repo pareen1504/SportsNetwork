@@ -32,4 +32,18 @@ internal fun Project.configureAndroidCompose(
             freeCompilerArgs += kotlinFreeCompilerArgs
         }
     }
+
+    tasks.withType<KotlinCompile>().configureEach {
+        if (project.findProperty("enableComposeCompilerReports") == "true") {
+            outputs.upToDateWhen { false }
+            kotlinOptions.freeCompilerArgs += listOf(
+                "-P",
+                "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=" +
+                        project.buildDir.absolutePath + "/compose",
+                "-P",
+                "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=" +
+                        project.buildDir.absolutePath + "/compose"
+            )
+        }
+    }
 }

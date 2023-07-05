@@ -49,7 +49,7 @@ internal class RetrofitServiceCreator @Inject constructor(
         with(Retrofit.Builder()) {
             client(okHttpClient)
             addCallAdapterFactory(NetworkResponseCallAdapterFactory)
-            addConverterFactory(MoshiConverterFactory.create(defaultRemoteMoshi))
-            baseUrl(BASE_URL)
+            addConverterFactory(MoshiConverterFactory.create(moshiOverride?.build() ?: defaultRemoteMoshi))
+            baseUrl(baseUrlOverride ?: BASE_URL)
         }
 }

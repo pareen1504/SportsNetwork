@@ -19,9 +19,9 @@ import com.pd.feed.state.FeedFlowUiState
 import com.pd.palette.compose.SportsNetworkTheme
 
 @Composable
-fun Feed(viewState: FeedFlowUiState.ShowFeed) {
+fun Feed(viewState: () -> FeedFlowUiState.ShowFeed) {
     val listState = rememberLazyListState()
-    viewState.feedList?.let { feedList ->
+    viewState().feedList?.let { feedList ->
         Box(
             modifier = Modifier
                 .fillMaxSize()

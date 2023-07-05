@@ -4,6 +4,7 @@ import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.tasks.testing.Test
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -24,6 +25,8 @@ internal fun Project.configureKotlinAndroid(
         }
 
         configureKotlin()
+        lint(project)
+        testOptions()
     }
 }
 
@@ -41,5 +44,33 @@ private fun Project.configureKotlin() {
             jvmTarget = JavaVersion.VERSION_11.toString()
             freeCompilerArgs += kotlinFreeCompilerArgs
         }
+    }
+}
+
+/* LINT */
+
+fun CommonExtension<*, *, *, *>.lint(project: Project) {
+    lint {
+        abortOnError = true
+        checkAllWarnings = true
+        ignoreWarnings = false
+        checkReleaseBuilds = true
+        checkDependencies = true
+        warningsAsErrors = true
+        lintConfig = project.file("${project.rootDir}/config/quality/lint.xml")
+        htmlReport = true
+        xmlReport = true
+        disable += disabledIssues
+    }
+}
+
+/* TEST OPTIONS */
+
+@Suppress("UnstableApiUsage")
+fun CommonExtension<*, *, *, *>.testOptions() {
+    testOptions {
+        animationsDisabled = true
+        unitTests.isIncludeAndroidResources = true
+        unitTests.all { test: Test -> test.testLogging }
     }
 }

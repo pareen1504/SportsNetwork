@@ -1,5 +1,5 @@
 plugins {
-    id("sportsnetwork.android.library")
+    id("sportsnetwork.android.feature")
     id("sportsnetwork.android.library.compose")
     id("sportsnetwork.android.hilt")
     id("kotlinx-serialization")

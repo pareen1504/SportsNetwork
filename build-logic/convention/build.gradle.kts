@@ -22,6 +22,7 @@ dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.detekt.gradle.plugin)
 }
 
 gradlePlugin {
@@ -34,6 +35,10 @@ gradlePlugin {
             id = "sportsnetwork.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
+        register("androidApplicationJacoco") {
+            id = "sportsnetwork.android.application.jacoco"
+            implementationClass = "AndroidApplicationJacocoConventionPlugin"
+        }
         register("androidLibraryCompose") {
             id = "sportsnetwork.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
@@ -41,6 +46,14 @@ gradlePlugin {
         register("androidLibrary") {
             id = "sportsnetwork.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
+        }
+        register("detekt") {
+            id = "sportsnetwork.detekt"
+            implementationClass = "DetektConventionPlugin"
+        }
+        register("androidLibraryJacoco") {
+            id = "sportsnetwork.android.library.jacoco"
+            implementationClass = "AndroidLibraryJacocoConventionPlugin"
         }
         register("androidFeature") {
             id = "sportsnetwork.android.feature"

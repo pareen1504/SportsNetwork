@@ -1,7 +1,5 @@
 package com.pd.domain.entity
 
-import java.util.Date
-
 data class FeedUiData(
     val type: Int? = null,
     val sportsType: String,
@@ -10,6 +8,7 @@ data class FeedUiData(
     val gameNumber: Int? = null,
     val mvp: String? = null,
     val publicationDate: String? = null,
+    val publicationTime: Long? = null,
     val tournament: String? = null,
     val winner: String? = null,
     val looser: String? = null
