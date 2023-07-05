@@ -20,6 +20,7 @@ import javax.inject.Inject
 class ConnectivityManagerNetworkMonitor @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : NetworkMonitor {
+    @SuppressWarnings("LabeledExpression")
     override val isOnline: Flow<Boolean> = callbackFlow {
         val connectivityManager = context.getSystemService<ConnectivityManager>()
         if (connectivityManager == null) {
@@ -64,12 +65,13 @@ class ConnectivityManagerNetworkMonitor @Inject constructor(
         .conflate()
 
     @Suppress("DEPRECATION")
-    private fun ConnectivityManager.isCurrentlyConnected() = when {
-        VERSION.SDK_INT >= VERSION_CODES.M ->
-            activeNetwork
-                ?.let(::getNetworkCapabilities)
-                ?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-
-        else -> activeNetworkInfo?.isConnected
-    } ?: false
+    private fun ConnectivityManager.isCurrentlyConnected() = (
+        if (VERSION.SDK_INT >= VERSION_CODES.M) {
+        activeNetwork
+        ?.let(::getNetworkCapabilities)
+        ?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    } else {
+        activeNetworkInfo?.isConnected
+    }
+    ) ?: false
 }

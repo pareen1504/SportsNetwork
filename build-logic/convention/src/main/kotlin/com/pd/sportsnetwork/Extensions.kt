@@ -14,3 +14,13 @@ inline val kotlinFreeCompilerArgs: List<String>
         "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
         "-opt-in=kotlinx.coroutines.FlowPreview",
     )
+
+val disabledIssues = arrayOf(
+    "UnusedIds", // Because of UAST
+    "InvalidPackage",
+    "DialogFragmentCallbacksDetector", // From Android Gradle Plugin version 7.4.0-alpha02 and onwards
+    "UnknownIssueId", // From Android Gradle Plugin version 7.4.0-alpha02 and onwards
+    "GradleDependency",
+    "AndroidGradlePluginVersion",
+    "NewerVersionAvailable",
+)

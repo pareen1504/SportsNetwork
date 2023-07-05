@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.pd.common.R
 import com.pd.common.composables.SportNetworkButton
@@ -34,14 +35,24 @@ import com.pd.palette.compose.SportsNetworkTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+@SuppressWarnings("LongMethod")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun FeedScreen(viewModel: FeedViewModel) {
+fun FeedScreen() {
+    val viewModel: FeedViewModel = hiltViewModel()
     val scope = rememberCoroutineScope()
     val snackBarHostState = remember { SnackbarHostState() }
     val refreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
-    val pullRefreshState = rememberPullRefreshState(refreshing, { scope.launch { viewModel.getFeed() } })
     val isOffline by viewModel.isOffline.collectAsStateWithLifecycle()
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = refreshing,
+        onRefresh = {
+            if (isOffline.not()) {
+                scope.launch { viewModel.getFeed() }
+            }
+        }
+    )
+    val buttonText = stringResource(R.string.get_results)
     val notConnectedMessage = stringResource(R.string.not_connected)
     val feedApiError = stringResource(R.string.feed_error)
     val context = LocalContext.current
@@ -57,7 +68,7 @@ fun FeedScreen(viewModel: FeedViewModel) {
         }
     }
     Scaffold(
-        topBar = { SportsNetworkTopBar(topBarTitle) },
+        topBar = { SportsNetworkTopBar { topBarTitle } },
         snackbarHost = { SnackbarHost(snackBarHostState) },
     ) { padding ->
         Box(
@@ -73,21 +84,18 @@ fun FeedScreen(viewModel: FeedViewModel) {
                 modifier = Modifier.wrapContentSize(),
                 loading = { },
                 showFeed = {
-                    when {
-                        it.feedList.isNullOrEmpty() ->
-                            showFeeApiError(viewModel, scope, snackBarHostState, feedApiError)
-
-                        else -> {
-                            it.feedList.firstOrNull()?.publicationDate?.let { title ->
-                                topBarTitle = stringResource(id = R.string.results_for, title)
-                            }
-                            Feed(it)
+                    if (it.feedList.isNullOrEmpty()) {
+                        showFeeApiError(viewModel, scope, snackBarHostState, feedApiError)
+                    } else {
+                        it.feedList.firstOrNull()?.publicationDate?.let { title ->
+                            topBarTitle = stringResource(id = R.string.results_for, title)
                         }
+                        Feed { it }
                     }
                 },
                 failure = { showFeeApiError(viewModel, scope, snackBarHostState, feedApiError) },
                 idle = {
-                    SportNetworkButton(text = { R.string.get_results }) {
+                    SportNetworkButton(text = { buttonText }) {
                         scope.launch { viewModel.getFeed() }
                     }
                 }

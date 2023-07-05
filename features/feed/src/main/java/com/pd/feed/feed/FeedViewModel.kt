@@ -18,6 +18,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
+private const val DELAY = 500L
+private const val STOP_TIMEOUT_MILLIS = 5_000L
+
 @HiltViewModel
 class FeedViewModel @Inject constructor(
     networkMonitor: NetworkMonitor,
@@ -33,7 +36,7 @@ class FeedViewModel @Inject constructor(
         .map(Boolean::not)
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
+            started = SharingStarted.WhileSubscribed(STOP_TIMEOUT_MILLIS),
             initialValue = false,
         )
 
@@ -43,8 +46,12 @@ class FeedViewModel @Inject constructor(
             return
         }
         updateIsRefreshing(true)
-        delay(500)
+        delay(DELAY)
         feedUseCase.execute().onSuccess {
+            if (it.feedUiList.isNullOrEmpty()) {
+                showFeedError()
+                return
+            }
             updateIsRefreshing(false)
             _feedFlowUiState.value = FeedFlowUiState.ShowFeed(
                 it.feedUiList?.map { data ->
@@ -67,17 +74,27 @@ class FeedViewModel @Inject constructor(
                 }
             )
         }.onFailure {
-            updateIsRefreshing(false)
-            _feedFlowUiState.value = FeedFlowUiState.Error
-            Log.e("FeedViewModel", "feedUseCase api failure")
+            showFeedError()
         }
+    }
+
+    private fun showFeedError() {
+        updateIsRefreshing(false)
+        _feedFlowUiState.value = FeedFlowUiState.Error
+        Log.e("FeedViewModel", "feedUseCase api failure")
     }
 
     private fun feedDataToString(feed: FeedData): String? {
         return when (feed.type) {
-            SportsType.F1.type -> "${feed.winner} wins ${feed.tournament} by ${feed.seconds} seconds"
-            SportsType.NBA.type -> "${feed.mvp} leads ${feed.winner} to game ${feed.gameNumber} win in the ${feed.tournament}"
-            SportsType.Tennis.type -> "${feed.tournament}: ${feed.winner} wins against ${feed.looser} in ${feed.numberOfSets} sets"
+            SportsType.F1.type ->
+                "${feed.winner} wins ${feed.tournament} by ${feed.seconds} seconds"
+
+            SportsType.NBA.type ->
+                "${feed.mvp} leads ${feed.winner} to game ${feed.gameNumber} win in the ${feed.tournament}"
+
+            SportsType.Tennis.type ->
+                "${feed.tournament}: ${feed.winner} wins against ${feed.looser} in ${feed.numberOfSets} sets"
+
             else -> null
         }
     }
@@ -86,7 +103,7 @@ class FeedViewModel @Inject constructor(
         _feedFlowUiState.value = state
     }
 
-    fun updateIsRefreshing(isRefreshing: Boolean) {
+    private fun updateIsRefreshing(isRefreshing: Boolean) {
         _isRefreshing.value = isRefreshing
     }
 }

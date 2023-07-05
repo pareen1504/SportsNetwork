@@ -14,14 +14,16 @@ import com.pd.common.R
 import com.pd.palette.compose.SportsNetworkTheme
 
 @Composable
-fun SportsNetworkTopBar(titleRes: String = stringResource(id = R.string.app_name)) {
+fun SportsNetworkTopBar(titleRes: () -> String? = { null }) {
     TopAppBar(
         modifier = Modifier.fillMaxWidth(),
         backgroundColor = SportsNetworkTheme.colors.backgroundPrimary,
     ) {
         Text(
-            modifier = Modifier.wrapContentSize().padding(horizontal = 12.dp),
-            text = titleRes,
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(horizontal = 12.dp),
+            text = titleRes() ?: stringResource(id = R.string.app_name),
             style = SportsNetworkTheme.typography.TitleT1.copy(
                 textAlign = TextAlign.Start
             )

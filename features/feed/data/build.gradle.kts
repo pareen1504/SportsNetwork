@@ -1,5 +1,6 @@
 plugins {
     id("sportsnetwork.jvm.library")
+    id("jacoco")
     id("sportsnetwork.kapt")
     id("com.google.devtools.ksp")
 }

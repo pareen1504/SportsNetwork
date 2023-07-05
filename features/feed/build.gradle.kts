@@ -13,6 +13,7 @@ dependencies {
     implementation(project(":common:palette"))
     implementation(project(":features:feed:domain"))
     implementation(libs.androidx.activity.compose)
+    implementation(libs.hilt.navigation.compose)
     implementation(libs.appcompat)
     implementation(libs.material)
 }

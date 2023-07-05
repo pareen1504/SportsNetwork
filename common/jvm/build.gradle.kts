@@ -1,6 +1,7 @@
 plugins {
     id("sportsnetwork.jvm.library")
     id("sportsnetwork.kapt")
+    id("com.google.devtools.ksp")
 }
 
 dependencies {
@@ -9,5 +10,5 @@ dependencies {
     implementation(libs.hilt.core)
     kapt(libs.hilt.core.compiler)
     implementation(libs.moshi)
-    kapt(libs.moshi.codegen)
+    ksp(libs.moshi.codegen)
 }

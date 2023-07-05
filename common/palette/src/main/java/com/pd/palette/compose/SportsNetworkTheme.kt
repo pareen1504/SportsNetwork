@@ -62,7 +62,9 @@ fun SportsNetworkTheme(darkTheme: Boolean = isNightMode(), content: @Composable 
             color = colors.backgroundTertiary,
             darkIcons = useDarkIcons
         )
-        onDispose { /*No-Op*/ }
+        onDispose {
+            /*No-Op*/
+        }
     }
 
     CompositionLocalProvider(

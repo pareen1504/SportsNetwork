@@ -10,9 +10,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val SPLASH_DELAY = 1200L
+
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(): ViewModel() {
-    private var _uiState = MutableStateFlow<MainActivityUiState>(MainActivityUiState.ShowSplashScreen)
+class MainActivityViewModel @Inject constructor() : ViewModel() {
+    private var _uiState =
+        MutableStateFlow<MainActivityUiState>(MainActivityUiState.ShowSplashScreen)
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -22,7 +25,7 @@ class MainActivityViewModel @Inject constructor(): ViewModel() {
     }
 
     private suspend fun showSplashScreen() {
-        delay(1500)
+        delay(SPLASH_DELAY)
         _uiState.value = MainActivityUiState.MoveToFeedScreen
     }
 }

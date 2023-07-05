@@ -1,8 +1,11 @@
 plugins {
     id("sportsnetwork.android.application")
     id("sportsnetwork.android.application.compose")
+    id("sportsnetwork.detekt")
+    id("sportsnetwork.android.application.jacoco")
     id("sportsnetwork.kapt")
     id("sportsnetwork.android.hilt")
+    id("jacoco")
     id("com.google.devtools.ksp")
 }
 
